@@ -1,14 +1,13 @@
 create table UserGroupMetaData (
-	uuid INT64,
+	uuid VARCHAR NOT NULL,
 	name VARCHAR,
-	adminUserUUID INT64,
-	parentGroupUUID INT64,
+	adminUserUUID VArCHAR,
+	parentGroupUUID VArCHAR,
 	PRIMARY KEY (uuid)
 );
 
 create table UserGroupMembers(
-	groupUuid INT64,
-	userUuid INT64,
-	PRIMARY KEY (groupUuid, userUuid),
-	FOREIGN KEY (groupUuid) REFRENCES UserGroupMetaData(uuid)
+	groupUuid VArCHAR NOT NULL REFERENCES UserGroupMetaData(uuid),
+	userUuid VArCHAR NOT NULL,
+	PRIMARY KEY (groupUuid, userUuid)
 );
