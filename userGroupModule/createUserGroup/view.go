@@ -26,7 +26,6 @@ func validateRequest(request *map[string]interface{}, validatedRequest *map[stri
 }
 
 func RequestHandler(response http.ResponseWriter, Request *http.Request) {
-	response.Header().Set("Content-Type", "application/json")
 	var request map[string]interface{}
 	json.NewDecoder(Request.Body).Decode(&request)
 
@@ -37,6 +36,7 @@ func RequestHandler(response http.ResponseWriter, Request *http.Request) {
 	if validatedRequest["uuid"] == "nil" || validatedRequest["name"] == "nil" || validatedRequest["adminUserUuid"] == "nil" || validatedRequest["parentGroupUuid"] == "nil" {
 		response.WriteHeader(http.StatusBadRequest)
 		response.Write([]byte("400 - Bad request"))
+		return
 	}
 
 	isSuccess := createGroup(validatedRequest["uuid"], validatedRequest["name"],
@@ -45,8 +45,10 @@ func RequestHandler(response http.ResponseWriter, Request *http.Request) {
 	if !isSuccess {
 		response.WriteHeader(http.StatusInternalServerError)
 		response.Write([]byte("500 - Something bad happened"))
+		return
 	} else {
 		response.WriteHeader(http.StatusCreated)
 		response.Write([]byte("201 - User group created successfully"))
+		return
 	}
 }
