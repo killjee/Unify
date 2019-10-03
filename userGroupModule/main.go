@@ -3,8 +3,6 @@ package main
 
 import (
 	"userGroupModule/createUserGroup"
-	"database/sql"
-	_ "github.com/lib/pq"
 	"github.com/gorilla/mux"
 	"fmt"
 	"net/http"
@@ -21,16 +19,6 @@ func main() {
 	if err != nil {
 		fmt.Print(err)
 	}
-}
-
-func getDb() *sql.DB {
-	connStr := "user=postgres dbname=unify password=123456"
-	db, err := sql.Open("postgres", connStr)
-	if err != nil {	
-		fmt.Println("Jhandu balm")
-	}
-
-	return db
 }
 
 func route(router *mux.Router) {

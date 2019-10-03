@@ -21,6 +21,8 @@ func validateRequest(request *map[string]interface{}, validatedRequest *map[stri
 	(*validatedRequest)["name"] = checkAndGetValueOfKey("name", request)
 	(*validatedRequest)["adminUserUuid"] = checkAndGetValueOfKey("adminUserUuid", request)
 	(*validatedRequest)["parentGroupUuid"] = checkAndGetValueOfKey("parentGroupUuid", request)
+
+	//ToDo(Satyam): Add validation for valid adminUserUuid and ParentGroupUuid
 }
 
 func RequestHandler(response http.ResponseWriter, Request *http.Request) {
@@ -34,6 +36,17 @@ func RequestHandler(response http.ResponseWriter, Request *http.Request) {
 
 	if validatedRequest["uuid"] == "nil" || validatedRequest["name"] == "nil" || validatedRequest["adminUserUuid"] == "nil" || validatedRequest["parentGroupUuid"] == "nil" {
 		response.WriteHeader(http.StatusBadRequest)
-    	response.Write([]byte("400 - Bad request"))
+		response.Write([]byte("400 - Bad request"))
+	}
+
+	isSuccess := createGroup(validatedRequest["uuid"], validatedRequest["name"],
+								 validatedRequest["adminUserUuid"],
+								 validatedRequest["parentGroupUuid"])
+	if !isSuccess {
+		response.WriteHeader(http.StatusInternalServerError)
+		response.Write([]byte("500 - Something bad happened"))
+	} else {
+		response.WriteHeader(http.StatusCreated)
+		response.Write([]byte("201 - User group created successfully"))
 	}
 }
