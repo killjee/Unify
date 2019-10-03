@@ -34,5 +34,6 @@ func getDb() *sql.DB {
 }
 
 func route(router *mux.Router) {
-	router.HandleFunc("/", createUserGroup.RequestHandler).Methods("GET")
+	// router.HandleFunc("/", createUserGroup.RequestHandler).Methods("GET")
+	router.HandleFunc("/userGroup/create", createUserGroup.RequestHandler).Methods("POST")
 }
