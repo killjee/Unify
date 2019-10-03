@@ -1,8 +1,8 @@
 create table UserGroupMetaData (
 	uuid VARCHAR NOT NULL,
-	name VARCHAR,
-	adminUserUUID VArCHAR,
-	parentGroupUUID VArCHAR,
+	name VARCHAR NOT NULL,
+	adminUserUuid VArCHAR NOT NULL,
+	parentGroupUuid VArCHAR,
 	PRIMARY KEY (uuid)
 );
 
