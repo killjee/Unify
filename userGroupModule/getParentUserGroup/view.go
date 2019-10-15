@@ -7,7 +7,7 @@ import(
 )
 
 type Response struct {
-	parentUuid string `json:"parentUuid"`
+	ParentUuid string `json:"parentUuid"`
 }
 
 func RequestHandler(response http.ResponseWriter, Request *http.Request) {
@@ -37,7 +37,7 @@ func RequestHandler(response http.ResponseWriter, Request *http.Request) {
 		}
 	} else {
 		response.Header().Set("Content-Type", "application/json")
-		resp := Response { parentUuid: responseUuid }
+		resp := Response { ParentUuid: responseUuid }
 		fmt.Println(resp)
 		json.NewEncoder(response).Encode(resp)
 		return

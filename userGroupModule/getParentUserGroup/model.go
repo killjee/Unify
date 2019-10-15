@@ -30,6 +30,5 @@ func getParentUserGroupFromDb(uuid string) (string, int){
 		fmt.Println(err)
 		return "", 500
 	}
-	
 	return parentUuid, -1
 }
