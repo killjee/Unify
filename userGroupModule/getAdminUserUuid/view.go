@@ -37,6 +37,7 @@ func RequestHandler(response http.ResponseWriter, Request *http.Request) {
 		}
 	} else {
 		response.Header().Set("Content-Type", "application/json")
+		response.WriteHeader(http.StatusOK)
 		resp := Response { AdminUuid: responseUuid }
 		fmt.Println(resp)
 		json.NewEncoder(response).Encode(resp)

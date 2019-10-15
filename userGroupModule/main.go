@@ -5,6 +5,7 @@ import (
 	"userGroupModule/createUserGroup"
 	"userGroupModule/getParentUserGroup"
 	"userGroupModule/getAdminUserUuid"
+	"userGroupModule/addUserToUserGroup"
 	"github.com/gorilla/mux"
 	"fmt"
 	"net/http"
@@ -28,4 +29,5 @@ func route(router *mux.Router) {
 	router.HandleFunc("/userGroup/create", createUserGroup.RequestHandler).Methods("POST")
 	router.HandleFunc("/userGroup/parent", getParentUserGroup.RequestHandler).Methods("POST")
 	router.HandleFunc("/userGroup/admin", getAdminUserUuid.RequestHandler).Methods("POST")
+	router.HandleFunc("/userGroup/addUser", addUserToUserGroup.RequestHandler).Methods("POST")
 }
